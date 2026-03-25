@@ -5,7 +5,7 @@ public class Pessoa {
     private String nome;
     private int idade;
     private String cpf;
-    private Date dt_nasc;
+    private Date dtNasc;
     private String email;
     private String tel;
     private String endereco;
@@ -38,12 +38,12 @@ public class Pessoa {
         this.cpf = cpf;
     }
 
-    public Date getDt_nasc() {
-        return dt_nasc;
+    public Date getDtNasc() {
+        return dtNasc;
     }
 
-    public void setDt_nasc(Date dt_nasc) {
-        this.dt_nasc = dt_nasc;
+    public void setDtNasc(Date dtNasc) {
+        this.dtNasc = dtNasc;
     }
 
     public String getEmail() {
@@ -68,5 +68,11 @@ public class Pessoa {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + ", Idade: " + idade + ", CPF: " + cpf + ", Nasc: " + dtNasc +
+                ", Email: " + email + ", Tel: " + tel + ", Endereço: " + endereco;
     }
 }
