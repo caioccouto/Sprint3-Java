@@ -1,21 +1,40 @@
 package Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Pessoa {
     //Atributos
+    private int id;
     private String nome;
     private int idade;
     private String cpf;
-    private Date dtNasc;
+    private LocalDate dtNasc;
     private String email;
     private String tel;
     private String endereco;
 
     //Construtor
-    public Pessoa() {}
+
+
+    public Pessoa(String nome, int idade, String cpf, LocalDate dtNasc, String email, String tel, String endereco) {
+        this.nome = nome;
+        this.idade = idade;
+        this.cpf = cpf;
+        this.dtNasc = dtNasc;
+        this.email = email;
+        this.tel = tel;
+        this.endereco = endereco;
+    }
 
     //Getters e Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -40,11 +59,11 @@ public class Pessoa {
         this.cpf = cpf;
     }
 
-    public Date getDtNasc() {
+    public LocalDate getDtNasc() {
         return dtNasc;
     }
 
-    public void setDtNasc(Date dtNasc) {
+    public void setDtNasc(LocalDate dtNasc) {
         this.dtNasc = dtNasc;
     }
 

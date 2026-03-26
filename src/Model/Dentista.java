@@ -1,9 +1,14 @@
 package Model;
 
-public class Dentista {
+import java.time.LocalDate;
+
+public class Dentista extends Pessoa{
     private String cro;
 
-    public Dentista() {}
+    public Dentista(String nome, int idade, String cpf, LocalDate dtNasc, String email, String tel, String endereco, String cro) {
+        super(nome, idade, cpf, dtNasc, email, tel, endereco);
+        this.cro = cro;
+    }
 
     public String getCro() {
         return cro;
@@ -16,8 +21,6 @@ public class Dentista {
     @Override
     public String toString() {
         return super.toString() +
-                "Dentista{" +
-                "cro='" + cro + '\'' +
-                '}';
+                ", CRO: " + cro;
     }
 }

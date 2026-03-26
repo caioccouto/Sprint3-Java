@@ -1,23 +1,10 @@
 package Model;
 
-public class Beneficiario {
-    private Dentista dentistaResp;
+import java.time.LocalDate;
 
-    public Beneficiario() {}
+public class Beneficiario extends Pessoa{
 
-    public Dentista getDentistaResp() {
-        return dentistaResp;
-    }
-
-    public void setDentistaResp(Dentista dentistaResp) {
-        this.dentistaResp = dentistaResp;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                "Beneficiario{" +
-                "dentistaResp=" + dentistaResp +
-                '}';
+    public Beneficiario(String nome, int idade, String cpf, LocalDate dtNasc, String email, String tel, String endereco) {
+        super(nome, idade, cpf, dtNasc, email, tel, endereco);
     }
 }

@@ -1,8 +1,10 @@
 package Connection;
 
+import Model.Beneficiario;
 import oracle.jdbc.pool.OracleDataSource;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class GerenciadorPessoas {
