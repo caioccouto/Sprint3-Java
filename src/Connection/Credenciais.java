@@ -1,4 +1,4 @@
-package Conexao;
+package Connection;
 
 public class Credenciais {
     public static final String user = "rm563452";

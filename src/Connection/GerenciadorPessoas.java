@@ -1,4 +1,4 @@
-package Conexao;
+package Connection;
 
 import oracle.jdbc.pool.OracleDataSource;
 
