@@ -2,6 +2,7 @@ package Main;
 
 import Services.SistemaCDB;
 
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -11,9 +12,18 @@ public class Main {
         SistemaCDB sis = new SistemaCDB();
 
         while(true){
-            showMenu();
-            int opc = sc.nextInt();
-            sc.nextLine();
+            int opc;
+            while (true){
+                try{
+                    showMenu();
+                    opc = sc.nextInt();
+                    sc.nextLine();
+                    break;
+                }catch (InputMismatchException e){
+                    System.out.println("Digite um numero válido!");
+                    sc.nextLine();
+                }
+            }
 
             if (opc == 1){
                 sis.addBenef(sc);
@@ -24,13 +34,13 @@ public class Main {
             } else if (opc == 4) {
                 sis.listarDents();
             } else if (opc == 5) {
-
+                sis.attBenef(sc);
             } else if (opc == 6) {
-
+                sis.attDent(sc);
             } else if (opc == 7) {
-
+                sis.removerBenef(sc);
             } else if (opc == 8) {
-
+                sis.removerDent(sc);
             } else if (opc == 0) {
                 System.out.println("Encerrando sistema...");
                 break;
