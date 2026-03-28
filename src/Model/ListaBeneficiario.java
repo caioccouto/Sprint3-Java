@@ -1,6 +1,4 @@
-package Lists;
-
-import Model.Beneficiario;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;

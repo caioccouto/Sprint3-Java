@@ -1,6 +1,4 @@
-package Lists;
-
-import Model.Dentista;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;

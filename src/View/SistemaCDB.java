@@ -1,9 +1,6 @@
-package Services;
+package View;
 
-import Lists.ListaBeneficiario;
-import Lists.ListaDentista;
-import Model.Beneficiario;
-import Model.Dentista;
+import Model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -14,6 +11,8 @@ import java.util.Scanner;
 public class SistemaCDB {
     ListaBeneficiario lb = new ListaBeneficiario();
     ListaDentista ld = new ListaDentista();
+    BeneficiarioDAO bd = new BeneficiarioDAO();
+    DentistaDAO dd = new DentistaDAO();
 
     public void addBenef(Scanner sc){
         System.out.println("===== Cadastrar Beneficiário =====");
@@ -55,6 +54,7 @@ public class SistemaCDB {
 
         Beneficiario b  = new Beneficiario(nome, idade, cpf, dtNasc, email, telefone, endereco);
         lb.addBenef(b);
+        bd.salvarBenef(b);
         System.out.println("Beneficiário cadastrado com sucesso!");
     }
 
@@ -112,6 +112,7 @@ public class SistemaCDB {
 
         Dentista d  = new Dentista(nome, idade, cpf, dtNasc, email, telefone, endereco, cro);
         ld.addDent(d);
+        dd.salvarDent(d);
         System.out.println("Dentista cadastrado com sucesso!");
     }
 
