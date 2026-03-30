@@ -208,6 +208,7 @@ public class SistemaCDB {
             lb.listaBenef().get(indice).setEmail(email);
             lb.listaBenef().get(indice).setTel(telefone);
             lb.listaBenef().get(indice).setEndereco(endereco);
+            bd.attBenef(lb.listaBenef().get(indice));
             System.out.println("Beneficiário atualizado!");
         }
         else {
@@ -267,6 +268,7 @@ public class SistemaCDB {
             ld.listaDent().get(indice).setEmail(email);
             ld.listaDent().get(indice).setTel(telefone);
             ld.listaDent().get(indice).setEndereco(endereco);
+            dd.attDent(ld.listaDent().get(indice));
             System.out.println("Dentista atualizado!");
         }
         else {
@@ -282,6 +284,7 @@ public class SistemaCDB {
         int indice = buscarBenef(lb.listaBenef(), id);
 
         if (indice != -1){
+            bd.removerBenef(lb.listaBenef().get(indice));
             lb.listaBenef().remove(indice);
             System.out.println("Beneficiário removido!");
         }else {
@@ -291,12 +294,13 @@ public class SistemaCDB {
 
     public void removerDent(Scanner sc){
         System.out.println("===== Remover Dentista =====");
-        System.out.println("Digite o ID do dentista que deseja remover: ");
+        System.out.println("Digite o CRO do dentista que deseja remover: ");
         int cro = sc.nextInt();
         sc.nextLine();
         int indice = buscarDent(ld.listaDent(), cro);
 
         if (indice != -1){
+            dd.removerDent(ld.listaDent().get(indice));
             ld.listaDent().remove(indice);
             System.out.println("Dentista removido!");
         }else {
