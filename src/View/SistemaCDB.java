@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import Model.*;
 
 import java.time.LocalDate;
@@ -13,26 +14,42 @@ public class SistemaCDB {
     ListaDentista ld = new ListaDentista();
     BeneficiarioDAO bd = new BeneficiarioDAO();
     DentistaDAO dd = new DentistaDAO();
+    Controller ct = new Controller();
 
     public void addBenef(Scanner sc){
         System.out.println("===== Cadastrar Beneficiário =====");
         System.out.println("Nome: ");
         String nome = sc.nextLine();
+
         int idade;
         while (true){
             try{
                 System.out.println("Idade: ");
                 idade = sc.nextInt();
                 sc.nextLine();
-                break;
+
+                if (ct.validarIdadeBenef(idade)){
+                    break;
+                }else {
+                    System.out.println("Digite um número válido!");
+                }
             } catch (InputMismatchException e) {
                 System.out.println("Digite um número válido!");
                 sc.nextLine();
             }
         }
 
-        System.out.println("CPF: ");
-        String cpf = sc.nextLine();
+        String cpf;
+        while(true){
+            System.out.println("CPF: ");
+            cpf = sc.nextLine();
+
+            if (ct.validarCpf(cpf)){
+                break;
+            }else {
+                System.out.println("CPF inválido! Deve conter 11 dígitos numéricos!");
+            }
+        }
 
         LocalDate dtNasc;
         while (true){
@@ -45,8 +62,18 @@ public class SistemaCDB {
             }
         }
 
-        System.out.println("Email: ");
-        String email = sc.nextLine();
+        String email;
+        while(true){
+            System.out.println("Email: ");
+            email = sc.nextLine();
+
+            if (ct.validarEmail(email)){
+                break;
+            }else {
+                System.out.println("Digite um email válido!");
+            }
+        }
+
         System.out.println("Telefone: ");
         String telefone = sc.nextLine();
         System.out.println("Endereço: ");
@@ -69,15 +96,29 @@ public class SistemaCDB {
                 System.out.println("Idade: ");
                 idade = sc.nextInt();
                 sc.nextLine();
-                break;
+
+                if (ct.validarIdadeDent(idade)){
+                    break;
+                }else {
+                    System.out.println("Dentista deve ser maior de idade!");
+                }
             } catch (InputMismatchException e) {
                 System.out.println("Digite um número válido!");
                 sc.nextLine();
             }
         }
 
-        System.out.println("CPF: ");
-        String cpf = sc.nextLine();
+        String cpf;
+        while(true){
+            System.out.println("CPF: ");
+            cpf = sc.nextLine();
+
+            if (ct.validarCpf(cpf)){
+                break;
+            }else {
+                System.out.println("CPF inválido! Deve conter 11 dígitos numéricos!");
+            }
+        }
 
         LocalDate dtNasc;
         while (true){
@@ -90,8 +131,18 @@ public class SistemaCDB {
             }
         }
 
-        System.out.println("Email: ");
-        String email = sc.nextLine();
+        String email;
+        while(true){
+            System.out.println("Email: ");
+            email = sc.nextLine();
+
+            if (ct.validarEmail(email)){
+                break;
+            }else {
+                System.out.println("Digite um email válido!");
+            }
+        }
+
         System.out.println("Telefone: ");
         String telefone = sc.nextLine();
         System.out.println("Endereço: ");
@@ -173,15 +224,29 @@ public class SistemaCDB {
                     System.out.println("Nova idade: ");
                     idade = sc.nextInt();
                     sc.nextLine();
-                    break;
+
+                    if (ct.validarIdadeBenef(idade)){
+                        break;
+                    }else {
+                        System.out.println("Digite um número válido");
+                    }
                 } catch (InputMismatchException e) {
                     System.out.println("Digite um número válido!");
                     sc.nextLine();
                 }
             }
 
-            System.out.println("Novo CPF: ");
-            String cpf = sc.nextLine();
+            String cpf;
+            while(true){
+                System.out.println("Novo CPF: ");
+                cpf = sc.nextLine();
+
+                if (ct.validarCpf(cpf)){
+                    break;
+                }else {
+                    System.out.println("CPF inválido! Deve conter 11 dígitos numéricos!");
+                }
+            }
 
             LocalDate dtNasc;
             while (true){
@@ -194,8 +259,18 @@ public class SistemaCDB {
                 }
             }
 
-            System.out.println("Novo email: ");
-            String email = sc.nextLine();
+            String email;
+            while(true){
+                System.out.println("Novo Email: ");
+                email = sc.nextLine();
+
+                if (ct.validarEmail(email)){
+                    break;
+                }else {
+                    System.out.println("Digite um email válido!");
+                }
+            }
+
             System.out.println("Novo telefone: ");
             String telefone = sc.nextLine();
             System.out.println("Novo endereço: ");
@@ -233,15 +308,29 @@ public class SistemaCDB {
                     System.out.println("Nova idade: ");
                     idade = sc.nextInt();
                     sc.nextLine();
-                    break;
+
+                    if (ct.validarIdadeDent(idade)){
+                        break;
+                    }else {
+                        System.out.println("Digite um número válido");
+                    }
                 } catch (InputMismatchException e) {
                     System.out.println("Digite um número válido!");
                     sc.nextLine();
                 }
             }
 
-            System.out.println("Novo CPF: ");
-            String cpf = sc.nextLine();
+            String cpf;
+            while(true){
+                System.out.println("Novo CPF: ");
+                cpf = sc.nextLine();
+
+                if (ct.validarCpf(cpf)){
+                    break;
+                }else {
+                    System.out.println("CPF inválido! Deve conter 11 dígitos numéricos!");
+                }
+            }
 
             LocalDate dtNasc;
             while (true){
@@ -254,8 +343,18 @@ public class SistemaCDB {
                 }
             }
 
-            System.out.println("Novo email: ");
-            String email = sc.nextLine();
+            String email;
+            while(true){
+                System.out.println("Novo Email: ");
+                email = sc.nextLine();
+
+                if (ct.validarEmail(email)){
+                    break;
+                }else {
+                    System.out.println("Digite um email válido!");
+                }
+            }
+
             System.out.println("Novo telefone: ");
             String telefone = sc.nextLine();
             System.out.println("Novo endereço: ");
