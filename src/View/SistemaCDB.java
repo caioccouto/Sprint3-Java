@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SistemaCDB {
-    ListaBeneficiario lb = new ListaBeneficiario();
-    ListaDentista ld = new ListaDentista();
-    BeneficiarioDAO bd = new BeneficiarioDAO();
-    DentistaDAO dd = new DentistaDAO();
-    Controller ct = new Controller();
+    private final ListaBeneficiario lb = new ListaBeneficiario();
+    private final ListaDentista ld = new ListaDentista();
+    private final BeneficiarioDAO bd = new BeneficiarioDAO();
+    private final DentistaDAO dd = new DentistaDAO();
+    private final Controller ct = new Controller();
 
     public void addBenef(Scanner sc){
         System.out.println("===== Cadastrar Beneficiário =====");
