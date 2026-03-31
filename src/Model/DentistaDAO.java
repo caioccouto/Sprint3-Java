@@ -57,4 +57,16 @@ public class DentistaDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void exibirDents(){
+        String sql = "SELECT * FROM DENTISTA";
+
+        Connection conn = Conexao.getConnection();
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

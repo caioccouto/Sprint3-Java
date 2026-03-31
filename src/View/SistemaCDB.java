@@ -175,6 +175,7 @@ public class SistemaCDB {
         for (int i = 0; i < lb.listaBenef().size(); i++){
             System.out.println((i + 1) + ". " + lb.listaBenef().get(i));
         }
+        bd.exibirBenefs();
     }
 
     public void listarDents(){
@@ -185,6 +186,7 @@ public class SistemaCDB {
         for (int i = 0; i < ld.listaDent().size(); i++){
             System.out.println((i + 1) + ". " + ld.listaDent().get(i));
         }
+        dd.exibirDents();
     }
 
     public int buscarBenef(List<Beneficiario> l, int id){

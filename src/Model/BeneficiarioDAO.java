@@ -58,4 +58,16 @@ public class BeneficiarioDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void exibirBenefs(){
+        String sql = "SELECT * FROM BENEFICIARIO";
+
+        Connection conn = Conexao.getConnection();
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
