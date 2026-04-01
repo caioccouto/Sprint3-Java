@@ -16,6 +16,19 @@ public class SistemaCDB {
     private final DentistaDAO dd = new DentistaDAO();
     private final Controller ct = new Controller();
 
+    public SistemaCDB(){
+        List<Beneficiario> benefs = bd.buscarBenefs();
+        for (Beneficiario b : benefs){
+            lb.addBenef(b);
+        }
+        Beneficiario.setContador(bd.buscarMaxId() + 1);
+
+        List<Dentista> dents = dd.buscarDents();
+        for (Dentista d : dents){
+            ld.addDent(d);
+        }
+    }
+
     public void addBenef(Scanner sc){
         System.out.println("===== Cadastrar Beneficiário =====");
         System.out.println("Nome: ");
@@ -154,7 +167,12 @@ public class SistemaCDB {
                 System.out.println("CRO: ");
                 cro = sc.nextInt();
                 sc.nextLine();
-                break;
+
+                if (ct.validarCro(cro, ld.listaDent())){
+                    System.out.println("CRO já cadastrado!");
+                }else {
+                    break;
+                }
             } catch (InputMismatchException e) {
                 System.out.println("Digite um número válido!");
                 sc.nextLine();
@@ -175,7 +193,6 @@ public class SistemaCDB {
         for (int i = 0; i < lb.listaBenef().size(); i++){
             System.out.println((i + 1) + ". " + lb.listaBenef().get(i));
         }
-        bd.exibirBenefs();
     }
 
     public void listarDents(){
@@ -186,7 +203,6 @@ public class SistemaCDB {
         for (int i = 0; i < ld.listaDent().size(); i++){
             System.out.println((i + 1) + ". " + ld.listaDent().get(i));
         }
-        dd.exibirDents();
     }
 
     public int buscarBenef(List<Beneficiario> l, int id){

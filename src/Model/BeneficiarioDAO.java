@@ -2,16 +2,18 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BeneficiarioDAO {
 
     public void salvarBenef(Beneficiario b){
         String sql = "INSERT into BENEFICIARIO (ID, NOME, IDADE, CPF, DT_NASC, EMAIL, TELEFONE, ENDERECO) values (?,?,?,?,?,?,?,?)";
 
-        Connection conn = Conexao.getConnection();
-        try{
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try(Connection conn = Conexao.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, b.getId());
             ps.setString(2, b.getNome());
             ps.setInt(3, b.getIdade());
@@ -29,9 +31,8 @@ public class BeneficiarioDAO {
     public void attBenef(Beneficiario b){
         String sql = "UPDATE BENEFICIARIO SET NOME=?, IDADE=?, CPF=?, DT_NASC=?, EMAIL=?, TELEFONE=?, ENDERECO=? WHERE ID=?";
 
-        Connection conn = Conexao.getConnection();
-        try{
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try(Connection conn = Conexao.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1, b.getNome());
             ps.setInt(2, b.getIdade());
             ps.setString(3, b.getCpf());
@@ -49,9 +50,8 @@ public class BeneficiarioDAO {
     public void removerBenef(Beneficiario b){
         String sql = "DELETE FROM BENEFICIARIO WHERE ID=?";
 
-        Connection conn = Conexao.getConnection();
-        try{
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try(Connection conn = Conexao.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, b.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -59,15 +59,42 @@ public class BeneficiarioDAO {
         }
     }
 
-    public void exibirBenefs(){
+    public List<Beneficiario> buscarBenefs(){
         String sql = "SELECT * FROM BENEFICIARIO";
-
-        Connection conn = Conexao.getConnection();
-        try{
+        List<Beneficiario> lista = new ArrayList<>();
+        try(Connection conn = Conexao.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.executeQuery();
+            ResultSet rs = ps.executeQuery()){
+            while(rs.next()){
+                Beneficiario b = new Beneficiario(
+                        rs.getString("NOME"),
+                        rs.getInt("IDADE"),
+                        rs.getString("CPF"),
+                        rs.getDate("DT_NASC").toLocalDate(),
+                        rs.getString("EMAIL"),
+                        rs.getString("TELEFONE"),
+                        rs.getString("ENDERECO")
+                );
+                b.setId(rs.getInt("ID"));
+                lista.add(b);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return lista;
+    }
+
+    public int buscarMaxId(){
+        String sql = "SELECT NVL(MAX(ID), 0) FROM BENEFICIARIO";
+        try(Connection conn = Conexao.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()){
+            if (rs.next()){
+                return rs.getInt(1);
+            }
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+        return 0;
     }
 }

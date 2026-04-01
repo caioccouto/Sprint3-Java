@@ -10,6 +10,10 @@ public class Beneficiario extends Pessoa{
         this.id = contador++;
     }
 
+    public static void setContador(int valor){
+        contador = valor;
+    }
+
     public int getId() {
         return id;
     }

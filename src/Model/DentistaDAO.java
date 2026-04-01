@@ -2,15 +2,17 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DentistaDAO {
     public void salvarDent(Dentista d){
         String sql = "INSERT into DENTISTA (CRO, NOME, IDADE, CPF, DT_NASC, EMAIL, TELEFONE, ENDERECO) values (?,?,?,?,?,?,?,?)";
 
-        Connection conn = Conexao.getConnection();
-        try{
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try(Connection conn = Conexao.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, d.getCro());
             ps.setString(2, d.getNome());
             ps.setInt(3, d.getIdade());
@@ -28,9 +30,8 @@ public class DentistaDAO {
     public void attDent(Dentista d){
         String sql = "UPDATE DENTISTA SET NOME=?, IDADE=?, CPF=?, DT_NASC=?, EMAIL=?, TELEFONE=?, ENDERECO=? WHERE CRO=?";
 
-        Connection conn = Conexao.getConnection();
-        try{
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try(Connection conn = Conexao.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1, d.getNome());
             ps.setInt(2, d.getIdade());
             ps.setString(3, d.getCpf());
@@ -48,9 +49,8 @@ public class DentistaDAO {
     public void removerDent(Dentista d){
         String sql = "DELETE FROM DENTISTA WHERE CRO=?";
 
-        Connection conn = Conexao.getConnection();
-        try{
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try(Connection conn = Conexao.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, d.getCro());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -58,15 +58,28 @@ public class DentistaDAO {
         }
     }
 
-    public void exibirDents(){
+    public List<Dentista> buscarDents(){
         String sql = "SELECT * FROM DENTISTA";
-
-        Connection conn = Conexao.getConnection();
-        try{
+        List<Dentista> lista = new ArrayList<>();
+        try(Connection conn = Conexao.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.executeQuery();
+            ResultSet rs = ps.executeQuery()){
+            while(rs.next()){
+                Dentista d = new Dentista(
+                        rs.getString("NOME"),
+                        rs.getInt("IDADE"),
+                        rs.getString("CPF"),
+                        rs.getDate("DT_NASC").toLocalDate(),
+                        rs.getString("EMAIL"),
+                        rs.getString("TELEFONE"),
+                        rs.getString("ENDERECO"),
+                        rs.getInt("CRO")
+                );
+                lista.add(d);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return lista;
     }
 }
