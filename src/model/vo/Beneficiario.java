@@ -1,8 +1,8 @@
-package Model;
+package model.vo;
 
 import java.time.LocalDate;
 
-public class Beneficiario extends Pessoa{
+public class Beneficiario extends Pessoa {
     private int id;
     private static int contador = 1;
     public Beneficiario(String nome, int idade, String cpf, LocalDate dtNasc, String email, String tel, String endereco) {

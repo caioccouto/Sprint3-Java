@@ -1,4 +1,6 @@
-package Model;
+package model.dao;
+
+import model.vo.Beneficiario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

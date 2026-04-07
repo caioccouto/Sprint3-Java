@@ -1,8 +1,8 @@
-package Model;
+package model.vo;
 
 import java.time.LocalDate;
 
-public class Dentista extends Pessoa{
+public class Dentista extends Pessoa {
     private int cro;
 
     public Dentista(String nome, int idade, String cpf, LocalDate dtNasc, String email, String tel, String endereco, int cro) {

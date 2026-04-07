@@ -1,7 +1,12 @@
-package View;
+package view;
 
-import Controller.Controller;
-import Model.*;
+import controller.Controller;
+import model.dao.BeneficiarioDAO;
+import model.dao.DentistaDAO;
+import model.repository.ListaBeneficiario;
+import model.repository.ListaDentista;
+import model.vo.Beneficiario;
+import model.vo.Dentista;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

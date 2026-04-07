@@ -1,8 +1,7 @@
-package Controller;
+package controller;
 
-import Model.Dentista;
-import Model.ListaBeneficiario;
-import Model.ListaDentista;
+import model.vo.Dentista;
+import model.repository.ListaDentista;
 
 import java.util.List;
 

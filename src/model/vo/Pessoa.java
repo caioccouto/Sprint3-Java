@@ -1,4 +1,4 @@
-package Model;
+package model.vo;
 
 import java.time.LocalDate;
 

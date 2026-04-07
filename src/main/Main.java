@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import View.SistemaCDB;
+import view.SistemaCDB;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -51,16 +51,28 @@ public class Main {
 
     }
     public static void showMenu(){
-        System.out.println("===== Sistema CDB =====");
-        System.out.println("1- Adicionar Beneficiário");
-        System.out.println("2- Adicionar Dentista");
-        System.out.println("3- Listar Beneficiários");
-        System.out.println("4- Listar Dentistas");
-        System.out.println("5- Atualizar Beneficiário");
-        System.out.println("6- Atualizar Dentista");
-        System.out.println("7- Remover Beneficiário");
-        System.out.println("8- Remover Dentista");
-        System.out.println("0- Sair");
-        System.out.println("Escolha uma das opções acima: ");
+        System.out.println("\n====================================");
+        System.out.println("           SISTEMA CDB");
+        System.out.println("====================================");
+
+        System.out.println("--- CADASTROS ---");
+        System.out.println(" 1 - Adicionar Beneficiário");
+        System.out.println(" 2 - Adicionar Dentista");
+
+        System.out.println("\n--- LISTAGENS ---");
+        System.out.println(" 3 - Listar Beneficiários");
+        System.out.println(" 4 - Listar Dentistas");
+
+        System.out.println("\n--- ATUALIZAÇÕES ---");
+        System.out.println(" 5 - Atualizar Beneficiário");
+        System.out.println(" 6 - Atualizar Dentista");
+
+        System.out.println("\n--- REMOÇÕES ---");
+        System.out.println(" 7 - Remover Beneficiário");
+        System.out.println(" 8 - Remover Dentista");
+
+        System.out.println("\n 0 - Sair");
+        System.out.println("====================================");
+        System.out.print("Escolha uma opção: ");
     }
 }

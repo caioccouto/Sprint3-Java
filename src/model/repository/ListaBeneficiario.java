@@ -1,4 +1,6 @@
-package Model;
+package model.repository;
+
+import model.vo.Beneficiario;
 
 import java.util.ArrayList;
 import java.util.List;
