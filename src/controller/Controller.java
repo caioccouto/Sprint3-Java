@@ -10,6 +10,10 @@ public class Controller {
         return cpf != null && cpf.matches("\\d{11}");
     }
 
+    public boolean validarCnpj(String cnpj){
+        return cnpj != null && cnpj.matches("\\d{14}");
+    }
+
     public boolean validarEmail(String email){
         return email.contains("@");
     }
@@ -29,5 +33,9 @@ public class Controller {
             }
         }
         return false;
+    }
+
+    public boolean validarValor(double valor){
+        return valor > 0;
     }
 }

@@ -2,6 +2,7 @@ package main;
 
 import view.SistemaBeneficiario;
 import view.SistemaDentista;
+import view.SistemaDoacao;
 import view.SistemaDoador;
 
 import java.util.InputMismatchException;
@@ -13,6 +14,7 @@ public class Main {
         SistemaBeneficiario sisBenef = new SistemaBeneficiario();
         SistemaDentista sisDent = new SistemaDentista();
         SistemaDoador sisDoador = new SistemaDoador();
+        SistemaDoacao sisDoacao = new SistemaDoacao();
 
         while(true){
             int opc;
@@ -98,7 +100,28 @@ public class Main {
                     }
                 }
             } else if (opc == 4) {
+                while (true){
+                    try{
+                        showMenuOpcoes();
+                        opc = sc.nextInt();
+                        sc.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Digite um numero válido!");
+                        sc.nextLine();
+                    }
 
+                    if (opc == 1){
+                        sisDoacao.addDoacao(sc);
+                    }  else if (opc == 2) {
+                        sisDoacao.listarDoacoes();
+                    } else if (opc == 3) {
+                        sisDoacao.attDoacao(sc);
+                    } else if (opc == 4) {
+                        sisDoacao.removerDoacao(sc);
+                    } else if (opc == 0) {
+                        break;
+                    }
+                }
             } else if (opc == 5) {
 
             } else if (opc == 6) {

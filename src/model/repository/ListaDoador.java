@@ -1,6 +1,5 @@
 package model.repository;
 
-import model.vo.Beneficiario;
 import model.vo.Doador;
 
 import java.util.ArrayList;

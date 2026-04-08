@@ -29,44 +29,63 @@ public class SistemaDoador {
         System.out.println("Nome: ");
         String nome = sc.nextLine();
 
-        int idade;
-        while (true){
-            try{
-                System.out.println("Idade: ");
-                idade = sc.nextInt();
-                sc.nextLine();
 
-                if (ct.validarIdade(idade)){
+        System.out.println("Tipo de Pessoa (PF ou PJ): ");
+        String tipoPessoa = sc.nextLine().toUpperCase();
+
+        String cpf = "";
+        String cnpj = "";
+        int idade = 0;
+        LocalDate dtNasc = null;
+
+        if (tipoPessoa.equals("PF")){
+            while(true){
+                System.out.println("CPF: ");
+                cpf = sc.nextLine();
+
+                if (ct.validarCpf(cpf)){
                     break;
                 }else {
-                    System.out.println("Digite um número válido!");
+                    System.out.println("CPF inválido! Deve conter 11 dígitos numéricos!");
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Digite um número válido!");
-                sc.nextLine();
             }
-        }
 
-        String cpf;
-        while(true){
-            System.out.println("CPF: ");
-            cpf = sc.nextLine();
+            while (true){
+                try{
+                    System.out.println("Idade: ");
+                    idade = sc.nextInt();
+                    sc.nextLine();
 
-            if (ct.validarCpf(cpf)){
-                break;
-            }else {
-                System.out.println("CPF inválido! Deve conter 11 dígitos numéricos!");
+                    if (ct.validarIdade(idade)){
+                        break;
+                    }else {
+                        System.out.println("Digite um número válido!");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Digite um número válido!");
+                    sc.nextLine();
+                }
             }
-        }
 
-        LocalDate dtNasc;
-        while (true){
-            try{
-                System.out.println("Data de nascimento (AAAA-MM-DD): ");
-                dtNasc = LocalDate.parse(sc.nextLine());
-                break;
-            }catch (DateTimeParseException e){
-                System.out.println("Digite uma data válida!");
+            while (true){
+                try{
+                    System.out.println("Data de nascimento (AAAA-MM-DD): ");
+                    dtNasc = LocalDate.parse(sc.nextLine());
+                    break;
+                }catch (DateTimeParseException e){
+                    System.out.println("Digite uma data válida!");
+                }
+            }
+        }else {
+            while(true){
+                System.out.println("CNPJ: ");
+                cnpj = sc.nextLine();
+
+                if (ct.validarCnpj(cnpj)){
+                    break;
+                }else {
+                    System.out.println("CNPJ inválido! Deve conter 14 dígitos numéricos!");
+                }
             }
         }
 
@@ -87,7 +106,7 @@ public class SistemaDoador {
         System.out.println("Endereço: ");
         String endereco = sc.nextLine();
 
-        Doador d = new Doador(nome, idade, cpf, dtNasc, email, telefone, endereco);
+        Doador d = new Doador(nome, idade, tipoPessoa, cpf, cnpj, dtNasc, email, telefone, endereco);
         ld.addDoador(d);
         doadorDAO.salvarDoador(d);
         System.out.println("Doador cadastrado com sucesso!");
@@ -142,15 +161,29 @@ public class SistemaDoador {
                 }
             }
 
-            String cpf;
-            while(true){
-                System.out.println("Novo CPF: ");
-                cpf = sc.nextLine();
+            String cpf = "";
+            String cnpj = "";
+            if (ld.listaDoador().get(indice).getTipoPessoa().equals("PF")){
+                while(true){
+                    System.out.println("Novo CPF: ");
+                    cpf = sc.nextLine();
 
-                if (ct.validarCpf(cpf)){
-                    break;
-                }else {
-                    System.out.println("CPF inválido! Deve conter 11 dígitos numéricos!");
+                    if (ct.validarCpf(cpf)){
+                        break;
+                    }else {
+                        System.out.println("CPF inválido! Deve conter 11 dígitos numéricos!");
+                    }
+                }
+            }else {
+                while(true){
+                    System.out.println("Novo CNPJ: ");
+                    cnpj = sc.nextLine();
+
+                    if (ct.validarCnpj(cnpj)){
+                        break;
+                    }else {
+                        System.out.println("CNPJ inválido! Deve conter 14 dígitos numéricos!");
+                    }
                 }
             }
 
@@ -185,6 +218,7 @@ public class SistemaDoador {
             ld.listaDoador().get(indice).setNome(nome);
             ld.listaDoador().get(indice).setIdade(idade);
             ld.listaDoador().get(indice).setCpf(cpf);
+            ld.listaDoador().get(indice).setCnpj(cnpj);
             ld.listaDoador().get(indice).setDtNasc(dtNasc);
             ld.listaDoador().get(indice).setEmail(email);
             ld.listaDoador().get(indice).setTel(telefone);
