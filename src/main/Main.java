@@ -1,6 +1,8 @@
 package main;
 
-import view.SistemaCDB;
+import view.SistemaBeneficiario;
+import view.SistemaDentista;
+import view.SistemaDoador;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,13 +10,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        SistemaCDB sis = new SistemaCDB();
+        SistemaBeneficiario sisBenef = new SistemaBeneficiario();
+        SistemaDentista sisDent = new SistemaDentista();
+        SistemaDoador sisDoador = new SistemaDoador();
 
         while(true){
             int opc;
             while (true){
                 try{
-                    showMenu();
+                    showMenuGeral();
                     opc = sc.nextInt();
                     sc.nextLine();
                     break;
@@ -25,21 +29,80 @@ public class Main {
             }
 
             if (opc == 1){
-                sis.addBenef(sc);
+                while (true){
+                    try{
+                        showMenuOpcoes();
+                        opc = sc.nextInt();
+                        sc.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Digite um numero válido!");
+                        sc.nextLine();
+                    }
+
+                    if (opc == 1){
+                        sisBenef.addBenef(sc);
+                    }  else if (opc == 2) {
+                        sisBenef.listarBenefs();
+                    } else if (opc == 3) {
+                        sisBenef.attBenef(sc);
+                    } else if (opc == 4) {
+                        sisBenef.removerBenef(sc);
+                    } else if (opc == 0) {
+                        break;
+                    }
+                }
             } else if (opc == 2) {
-                sis.addDent(sc);
+                while (true){
+                    try{
+                        showMenuOpcoes();
+                        opc = sc.nextInt();
+                        sc.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Digite um numero válido!");
+                        sc.nextLine();
+                    }
+
+                    if (opc == 1){
+                        sisDent.addDent(sc);
+                    }  else if (opc == 2) {
+                        sisDent.listarDents();
+                    } else if (opc == 3) {
+                        sisDent.attDent(sc);
+                    } else if (opc == 4) {
+                        sisDent.removerDent(sc);
+                    } else if (opc == 0) {
+                        break;
+                    }
+                }
             } else if (opc == 3) {
-                sis.listarBenefs();
+                while (true){
+                    try{
+                        showMenuOpcoes();
+                        opc = sc.nextInt();
+                        sc.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Digite um numero válido!");
+                        sc.nextLine();
+                    }
+
+                    if (opc == 1){
+                        sisDoador.addDoador(sc);
+                    }  else if (opc == 2) {
+                        sisDoador.listarDoador();
+                    } else if (opc == 3) {
+                        sisDoador.attDoador(sc);
+                    } else if (opc == 4) {
+                        sisDoador.removerDoador(sc);
+                    } else if (opc == 0) {
+                        break;
+                    }
+                }
             } else if (opc == 4) {
-                sis.listarDents();
+
             } else if (opc == 5) {
-                sis.attBenef(sc);
+
             } else if (opc == 6) {
-                sis.attDent(sc);
-            } else if (opc == 7) {
-                sis.removerBenef(sc);
-            } else if (opc == 8) {
-                sis.removerDent(sc);
+
             } else if (opc == 0) {
                 System.out.println("Encerrando sistema...");
                 break;
@@ -50,28 +113,30 @@ public class Main {
         }
 
     }
-    public static void showMenu(){
+    public static void showMenuOpcoes(){
+        System.out.println("\n====================================");
+        System.out.println("           MENU DE OPÇÕES");
+        System.out.println("====================================");
+        System.out.println("1- Adicionar");
+        System.out.println("2- Listar");
+        System.out.println("3- Atualizar");
+        System.out.println("4- Remover");
+        System.out.println("0- Voltar");
+        System.out.println("====================================");
+        System.out.print("Escolha uma opção: ");
+    }
+
+    public static void showMenuGeral(){
         System.out.println("\n====================================");
         System.out.println("           SISTEMA CDB");
         System.out.println("====================================");
-
-        System.out.println("--- CADASTROS ---");
-        System.out.println(" 1 - Adicionar Beneficiário");
-        System.out.println(" 2 - Adicionar Dentista");
-
-        System.out.println("\n--- LISTAGENS ---");
-        System.out.println(" 3 - Listar Beneficiários");
-        System.out.println(" 4 - Listar Dentistas");
-
-        System.out.println("\n--- ATUALIZAÇÕES ---");
-        System.out.println(" 5 - Atualizar Beneficiário");
-        System.out.println(" 6 - Atualizar Dentista");
-
-        System.out.println("\n--- REMOÇÕES ---");
-        System.out.println(" 7 - Remover Beneficiário");
-        System.out.println(" 8 - Remover Dentista");
-
-        System.out.println("\n 0 - Sair");
+        System.out.println("1- Beneficiários");
+        System.out.println("2- Dentistas");
+        System.out.println("3- Doadores");
+        System.out.println("4- Doações");
+        System.out.println("5- ");
+        System.out.println("6- ");
+        System.out.println("0- Sair");
         System.out.println("====================================");
         System.out.print("Escolha uma opção: ");
     }

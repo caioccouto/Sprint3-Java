@@ -1,12 +1,10 @@
 package controller;
 
 import model.vo.Dentista;
-import model.repository.ListaDentista;
 
 import java.util.List;
 
 public class Controller {
-    ListaDentista ld = new ListaDentista();
 
     public boolean validarCpf(String cpf){
         return cpf != null && cpf.matches("\\d{11}");
@@ -16,7 +14,7 @@ public class Controller {
         return email.contains("@");
     }
 
-    public boolean validarIdadeBenef(int idade){
+    public boolean validarIdade(int idade){
         return idade >= 0 && idade <= 120;
     }
 
