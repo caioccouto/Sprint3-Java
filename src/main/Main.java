@@ -13,6 +13,7 @@ public class Main {
         SistemaDoador sisDoador = new SistemaDoador();
         SistemaDoacao sisDoacao = new SistemaDoacao();
         SistemaVoluntario sisVol = new SistemaVoluntario();
+        SistemaTriagem sisTriagem = new SistemaTriagem();
 
         while(true){
             int opc;
@@ -144,7 +145,28 @@ public class Main {
                     }
                 }
             } else if (opc == 6) {
+                while (true){
+                    try{
+                        showMenuOpcoes();
+                        opc = sc.nextInt();
+                        sc.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Digite um numero válido!");
+                        sc.nextLine();
+                    }
 
+                    if (opc == 1){
+                        sisTriagem.addTriagem(sc);
+                    }  else if (opc == 2) {
+                        sisTriagem.listarTriagens();
+                    } else if (opc == 3) {
+                        sisTriagem.attTriagem(sc);
+                    } else if (opc == 4) {
+                        sisTriagem.removerTriagem(sc);
+                    } else if (opc == 0) {
+                        break;
+                    }
+                }
             } else if (opc == 0) {
                 System.out.println("Encerrando sistema...");
                 break;

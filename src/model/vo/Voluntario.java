@@ -32,6 +32,6 @@ public class Voluntario extends Pessoa{
     public String toString() {
         return super.toString() +
                 ", CRO: " + cro +
-                ", Dt Cadastro: " + dtCadastro;
+                ", DT Cadastro: " + dtCadastro;
     }
 }
