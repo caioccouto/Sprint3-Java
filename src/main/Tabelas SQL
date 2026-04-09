@@ -54,3 +54,15 @@ create table DOACAO (
     constraint FK_DOACAO_DOADOR foreign key (ID_DOADOR) references DOADOR(ID),
     constraint CK_VALOR_POSITIVO check (VALOR > 0)
 );
+
+create table VOLUNTARIO (
+    CRO       number(38) constraint PK_VOLUNTARIO primary key,
+    NOME      varchar2(100),
+    IDADE     number(3),
+    CPF       varchar2(11),
+    DT_NASC   date,
+    EMAIL     varchar2(255),
+    TELEFONE  varchar2(15),
+    ENDERECO  varchar2(255),
+    DT_CADASTRO date
+);

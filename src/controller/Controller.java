@@ -1,6 +1,7 @@
 package controller;
 
 import model.vo.Dentista;
+import model.vo.Voluntario;
 
 import java.util.List;
 
@@ -26,9 +27,18 @@ public class Controller {
         return idade >= 18 && idade <= 120;
     }
 
-    public boolean validarCro(int cro, List<Dentista> listaDent){
+    public boolean validarCroDent(int cro, List<Dentista> listaDent){
         for (Dentista d : listaDent){
             if (d.getCro() == cro){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCroVol(int cro, List<Voluntario> listaVol){
+        for (Voluntario v : listaVol){
+            if (v.getCro() == cro){
                 return true;
             }
         }

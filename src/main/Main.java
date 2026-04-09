@@ -1,9 +1,6 @@
 package main;
 
-import view.SistemaBeneficiario;
-import view.SistemaDentista;
-import view.SistemaDoacao;
-import view.SistemaDoador;
+import view.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -15,6 +12,7 @@ public class Main {
         SistemaDentista sisDent = new SistemaDentista();
         SistemaDoador sisDoador = new SistemaDoador();
         SistemaDoacao sisDoacao = new SistemaDoacao();
+        SistemaVoluntario sisVol = new SistemaVoluntario();
 
         while(true){
             int opc;
@@ -123,7 +121,28 @@ public class Main {
                     }
                 }
             } else if (opc == 5) {
+                while (true){
+                    try{
+                        showMenuOpcoes();
+                        opc = sc.nextInt();
+                        sc.nextLine();
+                    }catch (InputMismatchException e){
+                        System.out.println("Digite um numero válido!");
+                        sc.nextLine();
+                    }
 
+                    if (opc == 1){
+                        sisVol.addVol(sc);
+                    }  else if (opc == 2) {
+                        sisVol.listarVols();
+                    } else if (opc == 3) {
+                        sisVol.attVol(sc);
+                    } else if (opc == 4) {
+                        sisVol.removerVol(sc);
+                    } else if (opc == 0) {
+                        break;
+                    }
+                }
             } else if (opc == 6) {
 
             } else if (opc == 0) {
@@ -157,8 +176,8 @@ public class Main {
         System.out.println("2- Dentistas");
         System.out.println("3- Doadores");
         System.out.println("4- Doações");
-        System.out.println("5- ");
-        System.out.println("6- ");
+        System.out.println("5- Voluntários");
+        System.out.println("6- Triagens");
         System.out.println("0- Sair");
         System.out.println("====================================");
         System.out.print("Escolha uma opção: ");

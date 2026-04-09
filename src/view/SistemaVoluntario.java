@@ -1,9 +1,9 @@
 package view;
 
 import controller.Controller;
-import model.dao.DentistaDAO;
-import model.repository.ListaDentista;
-import model.vo.Dentista;
+import model.dao.VoluntarioDAO;
+import model.repository.ListaVoluntario;
+import model.vo.Voluntario;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -11,20 +11,20 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class SistemaDentista {
-    private final ListaDentista ld = new ListaDentista();
-    private final DentistaDAO dd = new DentistaDAO();
+public class SistemaVoluntario {
+    private final ListaVoluntario lv = new ListaVoluntario();
+    private final VoluntarioDAO vd = new VoluntarioDAO();
     private final Controller ct = new Controller();
 
-    public SistemaDentista(){
-        List<Dentista> dents = dd.buscarDents();
-        for (Dentista d : dents){
-            ld.addDent(d);
+    public SistemaVoluntario(){
+        List<Voluntario> vols = vd.buscarVols();
+        for (Voluntario v : vols){
+            lv.addVol(v);
         }
     }
 
-    public void addDent(Scanner sc){
-        System.out.println("===== Cadastrar Dentista =====");
+    public void addVol(Scanner sc){
+        System.out.println("===== Cadastrar Voluntário =====");
         System.out.println("Nome: ");
         String nome = sc.nextLine();
 
@@ -38,7 +38,7 @@ public class SistemaDentista {
                 if (ct.validarIdadeDent(idade)){
                     break;
                 }else {
-                    System.out.println("Dentista deve ser maior de idade!");
+                    System.out.println("Voluntário deve ser maior de idade!");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Digite um número válido!");
@@ -93,7 +93,7 @@ public class SistemaDentista {
                 cro = sc.nextInt();
                 sc.nextLine();
 
-                if (ct.validarCroDent(cro, ld.listaDent())){
+                if (ct.validarCroVol(cro, lv.listaVol())){
                     System.out.println("CRO já cadastrado!");
                 }else {
                     break;
@@ -104,23 +104,34 @@ public class SistemaDentista {
             }
         }
 
-        Dentista d  = new Dentista(nome, idade, cpf, dtNasc, email, telefone, endereco, cro);
-        ld.addDent(d);
-        dd.salvarDent(d);
-        System.out.println("Dentista cadastrado com sucesso!");
+        LocalDate dtCadastro;
+        while (true){
+            try{
+                System.out.println("Data do cadastro (AAAA-MM-DD): ");
+                dtCadastro = LocalDate.parse(sc.nextLine());
+                break;
+            }catch (DateTimeParseException e){
+                System.out.println("Digite uma data válida!");
+            }
+        }
+
+        Voluntario v = new Voluntario(nome, idade, cpf, dtNasc, email, telefone, endereco, cro, dtCadastro);
+        lv.addVol(v);
+        vd.salvarVol(v);
+        System.out.println("Voluntário cadastrado com sucesso!");
     }
 
-    public void listarDents(){
-        if (ld.listaDent().isEmpty()){
-            System.out.println("Nenhum dentista cadastrado!");
+    public void listarVols(){
+        if (lv.listaVol().isEmpty()){
+            System.out.println("Nenhum voluntário cadastrado!");
             return;
         }
-        for (int i = 0; i < ld.listaDent().size(); i++){
-            System.out.println((i + 1) + ". " + ld.listaDent().get(i));
+        for (int i = 0; i < lv.listaVol().size(); i++){
+            System.out.println((i + 1) + ". " + lv.listaVol().get(i));
         }
     }
 
-    public int buscarDent(List<Dentista> l, int cro){
+    public int buscarVol(List<Voluntario> l, int cro){
         int indice = -1;
         for (int i = 0; i < l.size(); i++){
             if (l.get(i).getCro() == cro){
@@ -130,12 +141,12 @@ public class SistemaDentista {
         return indice;
     }
 
-    public void attDent(Scanner sc){
-        System.out.println("===== Atualizar Dentista =====");
-        System.out.println("Digite o CRO do dentista que deseja atualizar: ");
+    public void attVol(Scanner sc){
+        System.out.println("===== Atualizar Voluntário =====");
+        System.out.println("Digite o CRO do voluntário que deseja atualizar: ");
         int cro = sc.nextInt();
         sc.nextLine();
-        int indice = buscarDent(ld.listaDent(), cro);
+        int indice = buscarVol(lv.listaVol(), cro);
 
         if (indice != -1){
             System.out.println("Novo nome: ");
@@ -199,34 +210,34 @@ public class SistemaDentista {
             System.out.println("Novo endereço: ");
             String endereco = sc.nextLine();
 
-            ld.listaDent().get(indice).setNome(nome);
-            ld.listaDent().get(indice).setIdade(idade);
-            ld.listaDent().get(indice).setCpf(cpf);
-            ld.listaDent().get(indice).setDtNasc(dtNasc);
-            ld.listaDent().get(indice).setEmail(email);
-            ld.listaDent().get(indice).setTel(telefone);
-            ld.listaDent().get(indice).setEndereco(endereco);
-            dd.attDent(ld.listaDent().get(indice));
-            System.out.println("Dentista atualizado!");
+            lv.listaVol().get(indice).setNome(nome);
+            lv.listaVol().get(indice).setIdade(idade);
+            lv.listaVol().get(indice).setCpf(cpf);
+            lv.listaVol().get(indice).setDtNasc(dtNasc);
+            lv.listaVol().get(indice).setEmail(email);
+            lv.listaVol().get(indice).setTel(telefone);
+            lv.listaVol().get(indice).setEndereco(endereco);
+            vd.attVol(lv.listaVol().get(indice));
+            System.out.println("Voluntário atualizado!");
         }
         else {
-            System.out.println("Dentista não encontrado!");
+            System.out.println("Voluntário não encontrado!");
         }
     }
 
-    public void removerDent(Scanner sc){
-        System.out.println("===== Remover Dentista =====");
-        System.out.println("Digite o CRO do dentista que deseja remover: ");
+    public void removerVol(Scanner sc){
+        System.out.println("===== Remover Voluntário =====");
+        System.out.println("Digite o CRO do voluntário que deseja remover: ");
         int cro = sc.nextInt();
         sc.nextLine();
-        int indice = buscarDent(ld.listaDent(), cro);
+        int indice = buscarVol(lv.listaVol(), cro);
 
         if (indice != -1){
-            dd.removerDent(ld.listaDent().get(indice));
-            ld.listaDent().remove(indice);
-            System.out.println("Dentista removido!");
+            vd.removerVol(lv.listaVol().get(indice));
+            lv.listaVol().remove(indice);
+            System.out.println("Voluntário removido!");
         }else {
-            System.out.println("Dentista não encontrado!");
+            System.out.println("Voluntário não encontrado!");
         }
     }
 }
