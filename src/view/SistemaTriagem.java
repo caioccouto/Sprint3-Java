@@ -13,8 +13,6 @@ public class SistemaTriagem {
 
     private final ListaTriagem lt = new ListaTriagem();
     private final TriagemDAO tDao = new TriagemDAO();
-    List<Beneficiario> benefs = new BeneficiarioDAO().buscarBenefs();
-    List<Voluntario> vols = new VoluntarioDAO().buscarVols();
 
     public SistemaTriagem(){
         List<Triagem> triagems = tDao.buscarTriagem();
@@ -26,6 +24,9 @@ public class SistemaTriagem {
 
     public void addTriagem(Scanner sc) {
         System.out.println("===== Registrar Triagem =====");
+
+        List<Beneficiario> benefs = new BeneficiarioDAO().buscarBenefs();
+        List<Voluntario> vols = new VoluntarioDAO().buscarVols();
 
         if (benefs.isEmpty()) {
             System.out.println("Nenhum beneficiário cadastrado! Cadastre um beneficiário primeiro.");

@@ -55,6 +55,9 @@ public class VoluntarioDAO {
             ps.setInt(1, v.getCro());
             ps.executeUpdate();
         } catch (SQLException e) {
+            if (e.getErrorCode() == 2292){
+                throw new RuntimeException("FK_VIOLATION", e);
+            }
             throw new RuntimeException(e);
         }
     }

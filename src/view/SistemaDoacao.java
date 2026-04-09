@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class SistemaDoacao {
 
     private final ListaDoacao ld = new ListaDoacao();
-    List<Doador> doadores = new DoadorDAO().buscarDoador();
     private final DoacaoDAO doacaoDAO = new DoacaoDAO();
     private final Controller ct = new Controller();
 
@@ -30,6 +29,8 @@ public class SistemaDoacao {
 
     public void addDoacao(Scanner sc) {
         System.out.println("===== Registrar Doação =====");
+
+        List<Doador> doadores = new DoadorDAO().buscarDoador();
 
         if (doadores.isEmpty()) {
             System.out.println("Nenhum doador cadastrado! Cadastre um doador primeiro.");
@@ -67,7 +68,7 @@ public class SistemaDoacao {
                 if (ct.validarValor(valor)) {
                     break;
                 } else {
-                    System.out.println("O valor deve ser maior que zero!");
+                    System.out.println("O valor deve ser positivo!");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Digite um valor numérico válido!");
@@ -133,7 +134,7 @@ public class SistemaDoacao {
                     if (ct.validarValor(valor)) {
                         break;
                     } else {
-                        System.out.println("O valor deve ser maior que zero!");
+                        System.out.println("O valor deve ser positivo!");
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Digite um valor numérico válido!");

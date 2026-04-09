@@ -46,6 +46,6 @@ public class Controller {
     }
 
     public boolean validarValor(double valor){
-        return valor > 0;
+        return valor >= 0;
     }
 }

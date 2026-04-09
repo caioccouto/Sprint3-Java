@@ -205,9 +205,17 @@ public class SistemaBeneficiario {
         int indice = buscarBenef(lb.listaBenef(), id);
 
         if (indice != -1){
-            bd.removerBenef(lb.listaBenef().get(indice));
-            lb.listaBenef().remove(indice);
-            System.out.println("Beneficiário removido!");
+            try {
+                bd.removerBenef(lb.listaBenef().get(indice));
+                lb.listaBenef().remove(indice);
+                System.out.println("Beneficiário removido!");
+            } catch (RuntimeException e) {
+                if ("FK_VIOLATION".equals(e.getMessage())){
+                    System.out.println("Erro: Esse beneficiário possui triagens vinvuladas e não pode ser removido!");
+                }else {
+                    System.out.println("Erro ao remover beneficiario: " + e.getMessage());
+                }
+            }
         }else {
             System.out.println("Beneficiário não encontrado!");
         }

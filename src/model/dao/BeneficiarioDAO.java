@@ -57,6 +57,9 @@ public class BeneficiarioDAO {
             ps.setInt(1, b.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
+            if (e.getErrorCode() == 2292){
+                throw new RuntimeException("FK_VIOLATION", e);
+            }
             throw new RuntimeException(e);
         }
     }

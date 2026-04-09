@@ -233,9 +233,17 @@ public class SistemaVoluntario {
         int indice = buscarVol(lv.listaVol(), cro);
 
         if (indice != -1){
-            vd.removerVol(lv.listaVol().get(indice));
-            lv.listaVol().remove(indice);
-            System.out.println("Voluntário removido!");
+            try {
+                vd.removerVol(lv.listaVol().get(indice));
+                lv.listaVol().remove(indice);
+                System.out.println("Voluntário removido!");
+            } catch (RuntimeException e) {
+                if ("FK_VIOLATION".equals(e.getMessage())){
+                    System.out.println("Erro: Esse voluntário está vinculado a uma triagem e não pode ser removido!");
+                }else {
+                    System.out.println("Erro ao remover voluntário: " + e.getMessage());
+                }
+            }
         }else {
             System.out.println("Voluntário não encontrado!");
         }
